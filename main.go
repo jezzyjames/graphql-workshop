@@ -19,60 +19,15 @@ func createRootQuery(db *sql.DB) *graphql.Object {
 	contactField := graphql.NewObject(graphql.ObjectConfig{
 		Name: "Contact",
 		Fields: graphql.Fields{
-			"id": &graphql.Field{
-				Type: graphql.Int,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).ID, nil
-				},
-			},
-			"name": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).Name, nil
-				},
-			},
-			"firstName": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).FirstName, nil
-				},
-			},
-			"lastName": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).LastName, nil
-				},
-			},
-			"genderId": &graphql.Field{
-				Type: graphql.Int,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).GenderID, nil
-				},
-			},
-			"dob": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).DOB, nil
-				},
-			},
-			"email": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).Email, nil
-				},
-			},
-			"phone": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).Phone, nil
-				},
-			},
-			"address": &graphql.Field{
-				Type: graphql.String,
-				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return p.Source.(models.Contact).Address, nil
-				},
-			}}})
+			"id":        &graphql.Field{Type: graphql.Int},
+			"name":      &graphql.Field{Type: graphql.String},
+			"firstName": &graphql.Field{Type: graphql.String},
+			"lastName":  &graphql.Field{Type: graphql.String},
+			"genderId":  &graphql.Field{Type: graphql.Int},
+			"dob":       &graphql.Field{Type: graphql.String},
+			"email":     &graphql.Field{Type: graphql.String},
+			"phone":     &graphql.Field{Type: graphql.String},
+			"address":   &graphql.Field{Type: graphql.String}}})
 
 	var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 		Name: "RootQuery",
