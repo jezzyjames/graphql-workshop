@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,8 +9,6 @@ import (
 
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
-
-	"database/sql"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -112,7 +111,7 @@ func main() {
 	// Create DB
 	os.Remove("./contact.db")
 
-	db, err := sql.Open("sqlite3", "./contact.db")
+	db, err := sql.Open("sqlite3", "./contact.sqlite")
 	if err != nil {
 		log.Fatal(err)
 	}
