@@ -7,21 +7,37 @@ import (
 	"grapql-api/pkg/graphql/schema"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/graphql-go/handler"
 	_ "github.com/mattn/go-sqlite3"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func main() {
-	// Initialize the database
-	os.Remove("./contact.db")
-
 	db, err := sql.Open("sqlite3", "./contact.sqlite")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
+
+	// Clear the user table
+	_, err = db.Exec("DELETE FROM user")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	password := "password"
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(string(hashedPassword))
+
+	result, err := db.Exec("INSERT INTO user (username, password) VALUES ($1, $2)", "username", hashedPassword)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(result)
 
 	// Initialize the GraphQL schema
 	graphqlSchema, err := schema.NewSchema(db)
@@ -38,7 +54,7 @@ func main() {
 
 	// Serve GraphQL API at /graphql endpoint
 	http.Handle("/graphql", auth.AuthenticationHandler(graphqlHandler))
-	http.HandleFunc("/login", auth.LoginHandler)
+	http.HandleFunc("/login", auth.LoginHandler2(db))
 
 	// Start the HTTP server
 	fmt.Println("Server is running at http://localhost:4002/graphql")

@@ -22,9 +22,6 @@ CREATE TABLE IF NOT EXISTS bank_transaction (
 
 CREATE TABLE IF NOT EXISTS user (
     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_name TEXT NOT NULL,
-    password TEXT NOT NULL,
-    salt TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    created_by TEXT NOT NULL
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
 );
