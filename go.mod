@@ -7,4 +7,7 @@ require (
 	github.com/graphql-go/handler v0.2.3
 )
 
-require github.com/mattn/go-sqlite3 v1.14.22 // indirect
+require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/mattn/go-sqlite3 v1.14.22 // indirect
+)

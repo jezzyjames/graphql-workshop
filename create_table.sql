@@ -1,4 +1,4 @@
-CREATE TABLE contact (
+CREATE TABLE IF NOT EXISTS contact (
     contact_id INTEGER primary key autoincrement,
     name TEXT,
     first_name TEXT,
@@ -13,9 +13,18 @@ CREATE TABLE contact (
     created_by TEXT
 );
 
-CREATE TABLE bank_transaction (
+CREATE TABLE IF NOT EXISTS bank_transaction (
     bank_transaction_id INTEGER primary key autoincrement,
     amount INTEGER,
     bank_account_id TEXT,
     status INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS user (
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_name TEXT NOT NULL,
+    password TEXT NOT NULL,
+    salt TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_by TEXT NOT NULL
 );
