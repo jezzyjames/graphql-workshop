@@ -5,15 +5,15 @@ import (
 	"grapql-api/pkg/data/models"
 )
 
-type ContactRepository struct {
+type ContactRepo struct {
 	DB *sql.DB
 }
 
-func NewContactRepository(db *sql.DB) *ContactRepository {
-	return &ContactRepository{DB: db}
+func NewContactRepo(db *sql.DB) *ContactRepo {
+	return &ContactRepo{DB: db}
 }
 
-func (r *ContactRepository) GetAllContacts() ([]models.Contact, error) {
+func (r *ContactRepo) GetAllContacts() ([]models.Contact, error) {
 	rows, err := r.DB.Query("SELECT * FROM contact")
 	if err != nil {
 		return nil, err

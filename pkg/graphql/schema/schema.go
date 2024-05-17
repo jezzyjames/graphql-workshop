@@ -9,10 +9,13 @@ import (
 )
 
 func NewSchema(db *sql.DB) (graphql.Schema, error) {
-	contactRepo := repository.NewContactRepository(db)
+	contactRepo := repository.NewContactRepo(db)
+	transactionRepo := repository.NewTransactionRepo(db)
 	rootQuery := resolvers.NewRootQuery(contactRepo)
+	mutationQuery := resolvers.NewMutationQuery(transactionRepo)
 
 	return graphql.NewSchema(graphql.SchemaConfig{
-		Query: rootQuery,
+		Query:    rootQuery,
+		Mutation: mutationQuery,
 	})
 }

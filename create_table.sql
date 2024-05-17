@@ -12,3 +12,10 @@ CREATE TABLE contact (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_by TEXT
 );
+
+CREATE TABLE bank_transaction (
+    bank_transaction_id INTEGER primary key autoincrement,
+    amount INTEGER,
+    bank_account_id TEXT,
+    status INTEGER
+);

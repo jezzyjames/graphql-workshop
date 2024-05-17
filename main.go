@@ -39,6 +39,15 @@ func main() {
 	http.Handle("/graphql", graphqlHandler)
 
 	// Start the HTTP server
-	fmt.Println("Server is running at http://localhost:4000/graphql")
-	http.ListenAndServe(":4000", nil)
+	fmt.Println("Server is running at http://localhost:4002/graphql")
+	http.ListenAndServe(":4002", nil)
 }
+
+// INSERT
+// mutation {
+// 	createDepositTransaction(  transaction: {
+// 	   status: 1,
+// 	   bankAccountId: "test",
+// 	   amount: 200,
+// 	 })
+//    }

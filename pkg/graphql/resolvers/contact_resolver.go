@@ -7,7 +7,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-func NewRootQuery(contactRepo *repository.ContactRepository) *graphql.Object {
+func NewRootQuery(contactRepo *repository.ContactRepo) *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
 		Name: "RootQuery",
 		Fields: graphql.Fields{
