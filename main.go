@@ -37,7 +37,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(result)
+	log.Println(result.LastInsertId())
 
 	// Initialize the GraphQL schema
 	graphqlSchema, err := schema.NewSchema(db)
