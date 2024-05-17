@@ -22,7 +22,7 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-func LoginHandler2(db *sql.DB) http.HandlerFunc {
+func LoginHandler(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var creds Credentials
 		err := json.NewDecoder(r.Body).Decode(&creds)
@@ -73,43 +73,6 @@ func LoginHandler2(db *sql.DB) http.HandlerFunc {
 		})
 	}
 }
-
-// func LoginHandler(db *sql.DB) http.HandlerFunc {
-// 	var creds Credentials
-// 	err := json.NewDecoder(r.Body).Decode(&creds)
-// 	if err != nil {
-// 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
-// 		return
-// 	}
-
-// 	// Validate credentials (in a real app, you'd query a database)
-// 	if creds.Username != "user" || creds.Password != "password" {
-// 		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
-// 		return
-// 	}
-
-// 	// Create JWT token
-// 	expirationTime := time.Now().Add(5 * time.Minute)
-// 	claims := &Claims{
-// 		Username: creds.Username,
-// 		StandardClaims: jwt.StandardClaims{
-// 			ExpiresAt: expirationTime.Unix(),
-// 		},
-// 	}
-
-// 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-// 	tokenString, err := token.SignedString(jwtKey)
-// 	if err != nil {
-// 		http.Error(w, "Error creating token", http.StatusInternalServerError)
-// 		return
-// 	}
-
-// 	http.SetCookie(w, &http.Cookie{
-// 		Name:    "token",
-// 		Value:   tokenString,
-// 		Expires: expirationTime,
-// 	})
-// }
 
 func AuthenticationHandler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

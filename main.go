@@ -54,7 +54,7 @@ func main() {
 
 	// Serve GraphQL API at /graphql endpoint
 	http.Handle("/graphql", auth.AuthenticationHandler(graphqlHandler))
-	http.HandleFunc("/login", auth.LoginHandler2(db))
+	http.HandleFunc("/login", auth.LoginHandler(db))
 
 	// Start the HTTP server
 	fmt.Println("Server is running at http://localhost:4002/graphql")
